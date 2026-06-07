@@ -5,30 +5,45 @@ package modelo;
  * En este caso, podria ser una bebida o un dulce.
  */
 public abstract class Producto {
+    private static int contador = 1;
+    private int serie;
 
     private TipoProducto tipo;
 
     /**
      * Constructor del producto
+     *
      * @param tipo tipo de producto para poder definir su precio.
      */
-    public Producto(TipoProducto tipo){
+    public Producto(TipoProducto tipo) {
         this.tipo = tipo;
+        this.serie = contador++;
     }
+
 
     /**
      * Retorna el precio del producto
+     *
      * @return precio en entero
      */
-    public int getPrecio(){
+    public int getPrecio() {
         return tipo.getPrecio();
     }
 
     /**
      * Retorna el tipo de producto
+     *
      * @return tipo de producto
      */
     public TipoProducto getTipo() {
         return tipo;
+    }
+    /**
+     * Retorna la serie del producto
+     *
+     * @return serie del producto
+     */
+    public int getSerie() {
+        return this.serie;
     }
 }

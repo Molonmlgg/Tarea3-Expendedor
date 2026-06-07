@@ -1,48 +1,64 @@
 package modelo;
 
+import java.util.ArrayList;
+
 /**
- * Clase que representa al comprador, el mismo intenta comprar y recibir vuelto de la modelo.Expendedora.
+ * Clase que representa el inventario y estado del usuario en la aplicación.
  */
 public class Comprador {
 
-    private Producto producto;
-    private int vuelto;
+    // El monedero infinito para guardar el dinero del usuario
+    private ArrayList<Moneda> monedero;
+    // La mochila donde guardará los productos que saque de la máquina
+    private ArrayList<Producto> productosComprados;
+
+    public Comprador() {
+        this.monedero = new ArrayList<>();
+        this.productosComprados = new ArrayList<>();
+
+        // El comprador empieza con una suma de dinero suficiente para varias compras
+        this.monedero.add(new Moneda1000());
+        this.monedero.add(new Moneda1000());
+        this.monedero.add(new Moneda500());
+        this.monedero.add(new Moneda100());
+        this.monedero.add(new Moneda100());
+    }
 
     /**
-     * Constructor del comprador.
-     * Intenta comprar un producto con la moneda que se le da.
-     * @param m moneda con la que paga
-     * @param tipo es el tipo de producto que elige el comprador
-     * @param expendedora maquina expendedora
+     * Agrega una moneda al monedero (útil para cuando recoja el vuelto o añada más dinero).
      */
-    public Comprador(Moneda m, TipoProducto tipo, Expendedora expendedora) throws PagoIncorrectoException,
-            PagoInsuficienteException,
-            NoHayProductoException{
-        this.producto = null;
-        this.vuelto = 0;
-        this.producto = expendedora.comprarProd(m, tipo);
-        // Recupera todo el vuelto
-        Moneda monedaVuelto;
-
-        while ((monedaVuelto = expendedora.getVuelto()) != null){
-            vuelto =  vuelto + monedaVuelto.getValor();
+    public void agregarMoneda(Moneda m) {
+        if (m != null) {
+            monedero.add(m);
         }
     }
 
     /**
-     * Retorna el produto que se compro
-     * Si la compra es fallida, retorna null
-     * @return producto o null
+     * Saca una moneda del monedero para usarla en un pago.
+     * @param indice El índice de la moneda en la lista.
+     * @return La Moneda seleccionada, o null si el índice es inválido.
      */
-    public Producto getProducto(){
-        return producto;
+    public Moneda obtenerMonedaParaPagar(int indice) {
+        if (indice >= 0 && indice < monedero.size()) {
+            return monedero.remove(indice);
+        }
+        return null;
     }
 
     /**
-     * Retorna el vuelto total
-     * @return vuelto en entero
+     * Guarda un producto retirado de la máquina en el inventario del comprador.
      */
-    public int getVuelto(){
-        return vuelto;
+    public void guardarProducto(Producto p) {
+        if (p != null) {
+            productosComprados.add(p);
+        }
+    }
+
+    public ArrayList<Moneda> getMonedero() {
+        return monedero;
+    }
+
+    public ArrayList<Producto> getProductosComprados() {
+        return productosComprados;
     }
 }
