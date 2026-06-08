@@ -46,6 +46,18 @@ public class Comprador {
     }
 
     /**
+     * Retorna una moneda sin retirarla del monedero
+     * @param indice posicion de la moneda
+     * @return moneda encontrada o null si el indice es invalido
+     */
+    public Moneda getMoneda(int indice){
+        if (indice >= 0 && indice < monedero.size()){
+            return monedero.get(indice);
+        }
+        return null;
+    }
+
+    /**
      * Guarda un producto retirado de la máquina en el inventario del comprador.
      */
     public void guardarProducto(Producto p) {

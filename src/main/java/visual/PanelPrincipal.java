@@ -2,6 +2,8 @@ package visual;
 
 import modelo.Comprador;
 import modelo.Expendedora;
+import modelo.Moneda;
+import modelo.Producto;
 
 import javax.swing.JPanel;
 import java.awt.GridLayout;
@@ -44,6 +46,49 @@ public class PanelPrincipal extends JPanel {
                         e.getX(),
                         e.getY()
                 );
+
+                if (panelComprador.isComprarPresionado()) {
+
+                    int indice = panelComprador.getMonedaSeleccionada();
+
+                    if (indice == -1) {
+                        System.out.println("No hay moneda seleccionada");
+                        panelComprador.limpiarBotonComprar();
+                        return;
+                    }
+
+                    if (panelExpendedor.getProductoSeleccionado() == null) {
+                        System.out.println("No hay producto seleccionado");
+                        panelComprador.limpiarBotonComprar();
+                        return;
+                    }
+
+                    try {
+                        Moneda moneda = comprador.getMoneda(indice);
+
+                        expendedora.comprarProd(
+                                moneda,
+                                panelExpendedor.getProductoSeleccionado()
+                        );
+
+                        Producto producto = expendedora.getProducto();
+
+                        comprador.guardarProducto(producto);
+
+                        comprador.obtenerMonedaParaPagar(indice);
+
+                        panelComprador.limpiarSeleccion();
+                        panelExpendedor.limpiarSeleccion();
+
+                        System.out.println("Compra realizada");
+
+                    }
+                    catch (Exception ex) {
+                        System.out.println(ex.getMessage());
+                    }
+
+                    panelComprador.limpiarBotonComprar();
+                }
             }
         });
 
