@@ -26,6 +26,7 @@ public class Expendedora {
         this.snickers = new Deposito<>();
         this.super8 = new Deposito<>();
         this.monVu = new Deposito<>();
+        this.depositoPago = new Deposito<>();
 
         for (int i = 0; i < cantidad; i++) {
             coca.addItem(new CocaCola());
