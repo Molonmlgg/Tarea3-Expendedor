@@ -84,4 +84,20 @@ public class PanelComprador extends JPanel {
             }
         }
     }
+
+    /***
+     * bloque retorna el indice de la moneda seleccionada
+     * @return indice seleccionado
+     */
+    public int getMonedaSeleccionada(){
+        return monedaSeleccionada;
+    }
+
+    /***
+     * Reiniciar la seleccion de moneda
+     */
+    public void limpiarSeleccion(){
+        monedaSeleccionada = -1;
+        repaint();
+    }
 }
