@@ -9,8 +9,6 @@ import java.awt.GridLayout;
 /**
  * Panel principal de la aplicacion
  * Contiene el panel del expendedor y el panel del comprador
- *
- * @author Matías Palacios
  */
 public class PanelPrincipal extends JPanel {
 
