@@ -74,6 +74,7 @@ public class PanelPrincipal extends JPanel {
                         Producto producto = expendedora.getProducto();
 
                         comprador.guardarProducto(producto);
+                        panelComprador.repaint();
 
                         comprador.obtenerMonedaParaPagar(indice);
 

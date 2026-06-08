@@ -2,6 +2,7 @@ package visual;
 
 import modelo.Comprador;
 import modelo.Moneda;
+import modelo.Producto;
 
 import javax.swing.JPanel;
 import java.awt.Color;
@@ -67,6 +68,17 @@ public class PanelComprador extends JPanel {
 
         g.drawString("MOCHILA", 30, 380);
         g.drawRect(30, 400, 300, 150);
+
+        ArrayList<Producto> mochila = comprador.getProductosComprados();
+
+        for (int i = 0; i < mochila.size(); i++){
+            Producto producto = mochila.get(i);
+            g.drawString(
+                    producto.getTipo() + " #" + producto.getSerie(),
+                    40,
+                    425 + (i*20)
+            );
+        }
     }
 
     /**
