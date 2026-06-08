@@ -6,6 +6,7 @@ import modelo.Sprite;
 import modelo.Fanta;
 import modelo.Super8;
 import modelo.Snickers;
+import modelo.TipoProducto;
 
 import javax.swing.JPanel;
 import java.awt.Color;
@@ -29,6 +30,8 @@ public class PanelExpendedor extends JPanel {
     // Mensaje que se muestra en la pantalla
     private String mensajePantalla;
 
+    private TipoProducto productoSeleccionado;
+
     /**
      * Constructor del panel expendedor
      * @param expendedora Expendedora asociada al panel
@@ -37,6 +40,7 @@ public class PanelExpendedor extends JPanel {
         this.expendedora = expendedora;
 
         this.mensajePantalla = "BIENVENIDO";
+        this.productoSeleccionado = null;
 
         this.setBackground(new Color(255, 200, 200));
 
@@ -137,5 +141,9 @@ public class PanelExpendedor extends JPanel {
         }
 
         repaint();
+    }
+
+    public TipoProducto getProductoSeleccionado(){
+        return productoSeleccionado;
     }
 }
