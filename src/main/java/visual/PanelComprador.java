@@ -15,39 +15,73 @@ import java.util.ArrayList;
  */
 public class PanelComprador extends JPanel {
     private Comprador comprador;
+    private int monedaSeleccionada;
+
     /**
      * Constructor del panel comprador.
      * Configura el color de fondo temporal para delimitar su espacio en pantalla.
      */
     public PanelComprador(Comprador comprador) {
         this.comprador = comprador;
+        this.monedaSeleccionada = -1;
         // Un fondo temporal azulado para diferenciarlo
         this.setBackground(new Color(200, 200, 255));
     }
 
     /**
      * Dibuja el contenido del comprador
+     *
      * @param g objeto gráfico
      */
     @Override
-    protected void paintComponent(Graphics g){
+    protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
         g.setColor(Color.BLACK);
         g.drawString("MONEDERO", 30, 40);
         ArrayList<Moneda> monedero = comprador.getMonedero();
 
-        for (int i = 0; i < monedero.size(); i++){
+        for (int i = 0; i < monedero.size(); i++) {
             Moneda moneda = monedero.get(i);
 
-            g.drawRect(30, 60 + (i*50), 100, 35);
+            if (i == monedaSeleccionada) {
+                g.setColor(Color.RED);
+                g.drawRect(25, 55 + (i * 50), 110, 45);
+            }
+
+            g.setColor(Color.BLACK);
+            g.drawRect(30, 60 + (i * 50), 100, 35);
             g.drawString(
                     "$" + moneda.getValor(),
                     60,
-                    82+(i*50)
+                    82 + (i * 50)
             );
         }
         g.drawString("MOCHILA", 30, 380);
         g.drawRect(30, 400, 300, 150);
+    }
+
+    /**
+     * Selecciona una moneda según la posición del clic.
+     * @param x
+     * @param y
+     */
+    public void reaccionarClic(int x, int y) {
+        ArrayList<Moneda> monedero = comprador.getMonedero();
+
+        for (int i = 0; i < monedero.size(); i++) {
+            int monedaX = 30;
+            int monedaY = 60 + (i * 50);
+
+            if (x >= monedaX &&
+                    x <= monedaX + 100 &&
+                    y >= monedaY &&
+                    y <= monedaY + 35) {
+
+                monedaSeleccionada = i;
+                repaint();
+                return;
+            }
+        }
     }
 }
