@@ -16,6 +16,7 @@ import java.util.ArrayList;
 public class PanelComprador extends JPanel {
     private Comprador comprador;
     private int monedaSeleccionada;
+    private boolean comprarPresionado;
 
     /**
      * Constructor del panel comprador.
@@ -24,6 +25,7 @@ public class PanelComprador extends JPanel {
     public PanelComprador(Comprador comprador) {
         this.comprador = comprador;
         this.monedaSeleccionada = -1;
+        this.comprarPresionado = false;
         // Un fondo temporal azulado para diferenciarlo
         this.setBackground(new Color(200, 200, 255));
     }
@@ -57,6 +59,12 @@ public class PanelComprador extends JPanel {
                     82 + (i * 50)
             );
         }
+        g.setColor(Color.GREEN);
+        g.fillRect(30,330,120,35);
+        g.setColor(Color.BLACK);
+        g.drawRect(30,330,120,35);
+        g.drawString("COMPRAR", 60, 352);
+
         g.drawString("MOCHILA", 30, 380);
         g.drawRect(30, 400, 300, 150);
     }
@@ -83,6 +91,13 @@ public class PanelComprador extends JPanel {
                 return;
             }
         }
+        if (x >= 30 &&
+                x <= 150 &&
+                y >= 330 &&
+                y <= 365) {
+
+            comprarPresionado = true;
+        }
     }
 
     /***
@@ -93,11 +108,19 @@ public class PanelComprador extends JPanel {
         return monedaSeleccionada;
     }
 
+    public boolean isComprarPresionado(){
+        return comprarPresionado;
+    }
+
     /***
      * Reiniciar la seleccion de moneda
      */
     public void limpiarSeleccion(){
         monedaSeleccionada = -1;
         repaint();
+    }
+
+    public void limpiarBotonComprar(){
+        comprarPresionado = false;
     }
 }
