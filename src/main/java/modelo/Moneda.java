@@ -1,4 +1,6 @@
 package modelo;
+import java.awt.Color;
+import java.awt.Graphics;
 
 /**
  * Clase abstracta que define el comportamiento base de las monedas.
@@ -25,7 +27,7 @@ public abstract class Moneda implements Comparable<Moneda> {
 
     @Override
     public String toString() {
-        return "modelo.Moneda de: " + this.getValor() + " (Serie: " + this.hashCode() + ")";
+        return "Moneda de: " + this.getValor() + " (Serie: " + this.getSerie() + ")";
     }
     /**
      * Retorna la serie de la moneda
@@ -33,6 +35,27 @@ public abstract class Moneda implements Comparable<Moneda> {
      * @return serie de moneda*/
     public int getSerie() {
         return this.serie;
+    }
+
+    /**
+     * Dibuja la representación gráfica de la moneda.
+     * @param g     El contexto gráfico (Graphics) utilizado para dibujar en el panel.
+     * @param x     La coordenada X donde se posicionará la moneda.
+     * @param y     La coordenada Y donde se posicionará la moneda.
+     * @param color El color representativo asignado a la moneda según su valor.
+     */
+    public void paintComponent(Graphics g, int x, int y, Color color) {
+        // Dibuja el fondo de la moneda
+        g.setColor(color);
+        g.fillOval(x, y, 40, 40);
+
+        // Dibuja el borde exterior
+        g.setColor(Color.BLACK);
+        g.drawOval(x, y, 40, 40);
+
+        // Dibuja el valor y el número de serie en el centro
+        g.drawString("$" + this.getValor(), x + 8, y + 18);
+        g.drawString("S:" + this.getSerie(), x + 8, y + 32);
     }
 
 }

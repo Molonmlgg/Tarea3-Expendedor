@@ -1,4 +1,6 @@
 package modelo;
+import java.awt.Color;
+import java.awt.Graphics;
 
 /**
  * Clase abstracta que representa un producto del expendedor
@@ -45,5 +47,24 @@ public abstract class Producto {
      */
     public int getSerie() {
         return this.serie;
+    }
+    /**
+     * Dibuja la representación gráfica del producto.
+     * * @param g     El contexto gráfico (Graphics) utilizado para dibujar en el panel.
+     * @param x     La coordenada X donde se posicionará el producto.
+     * @param y     La coordenada Y donde se posicionará el producto.
+     * @param color El color representativo asignado al tipo de producto.
+     */
+    public void paintComponent(Graphics g, int x, int y, Color color) {
+        // Dibuja el cuerpo del producto (rectángulo)
+        g.setColor(color);
+        g.fillRect(x, y, 40, 60);
+
+        // Dibuja el borde exterior
+        g.setColor(Color.BLACK);
+        g.drawRect(x, y, 40, 60);
+
+        // Dibuja el número de serie al centro
+        g.drawString("S:" + this.getSerie(), x + 5, y + 35);
     }
 }
