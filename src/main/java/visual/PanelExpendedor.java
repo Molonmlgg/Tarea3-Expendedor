@@ -1,5 +1,6 @@
 package visual;
 
+import modelo.CocaCola;
 import javax.swing.JPanel;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -10,16 +11,19 @@ import java.awt.Graphics;
  */
 public class PanelExpendedor extends JPanel {
 
+    private CocaCola cocaPrueba;
+
     /**
      * Constructor del panel expendedor.
      * Configura el color de fondo temporal para diferenciar su área en la interfaz.
      */
     public PanelExpendedor() {
         this.setBackground(new Color(255, 200, 200));
+        this.cocaPrueba = new CocaCola();
     }
 
     /**
-     * Método encargado de dibujar los elementos visuales en el panel.
+     * Metodo encargado de dibujar los elementos visuales en el panel.
      * @param g Objeto Graphics que actúa como el "pincel" para dibujar.
      */
     @Override
@@ -38,5 +42,8 @@ public class PanelExpendedor extends JPanel {
         // 3. Dibujar la ranura por donde sale la bebida (negro)
         g.setColor(Color.BLACK);
         g.fillRect(120, 480, 360, 80);
+        // 4. DIBUJAR LA BEBIDA ADENTRO DEL VIDRIO
+        // Le damos las coordenadas X: 150, Y: 100 para que quede en la zona celeste
+        cocaPrueba.paintComponent(g, 150, 100);
     }
 }

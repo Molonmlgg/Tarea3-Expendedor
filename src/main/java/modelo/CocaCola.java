@@ -1,5 +1,6 @@
 package modelo;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 
 /**
@@ -19,6 +20,23 @@ import java.awt.Graphics;
      */
     public void paintComponent(Graphics g, int x, int y) {
         super.paintComponent(g, x, y, Color.RED);
+
+    // Guardamos la fuente original para no desconfigurar el resto de dibujos
+    Font originalFont = g.getFont();
+
+    // 2. Definimos una letra negrita y un poco más grande
+    Font cokeFont = new Font("Arial", Font.BOLD, 10);
+        g.setFont(cokeFont);
+
+    // 3. Elegimos color BLANCO para que resalte sobre el rojo
+        g.setColor(Color.WHITE);
+
+    // 4. Dibujamos el texto "COKE" centrado arriba
+    // drawString(texto, x + desplazamiento, y + desplazamiento)
+        g.drawString("COKE", x + 5, y + 20);
+
+    // Restauramos la fuente original
+        g.setFont(originalFont);
     }
  }
 
