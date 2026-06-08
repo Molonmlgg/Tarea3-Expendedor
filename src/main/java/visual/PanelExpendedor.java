@@ -2,6 +2,7 @@ package visual;
 
 import modelo.Expendedora;
 import modelo.TipoProducto;
+import modelo.Producto;
 
 import javax.swing.JPanel;
 import java.awt.Color;
@@ -18,6 +19,7 @@ public class PanelExpendedor extends JPanel {
     private String mensajePantalla;
 
     private TipoProducto productoSeleccionado;
+    private Producto productoEnRanura;
 
     /**
      * Constructor del panel expendedor
@@ -28,6 +30,7 @@ public class PanelExpendedor extends JPanel {
 
         this.mensajePantalla = "BIENVENIDO";
         this.productoSeleccionado = null;
+        this.productoEnRanura = null;
 
         this.setBackground(new Color(255, 200, 200));
     }
@@ -89,7 +92,39 @@ public class PanelExpendedor extends JPanel {
         // Ranura de retiro
         g.setColor(Color.BLACK);
         g.fillRect(120, 480, 360, 80);
+        if (productoEnRanura != null){
+            Color color = Color.GRAY;
+            switch (productoEnRanura.getTipo()){
+                case COCACOLA:
+                    color = Color.RED;
+                    break;
 
+                case SPRITE:
+                    color = Color.GREEN;
+                    break;
+
+                case FANTA:
+                    color = Color.ORANGE;
+                    break;
+
+                case SUPER8:
+                    color = Color.YELLOW;
+                    break;
+
+                case SNICKERS:
+                    color = new Color(139, 69, 19);
+                    break;
+            }
+
+            productoEnRanura.paintComponent(
+                    g,
+                    200,
+                    490,
+                    color
+            );
+        }
+
+        //de aqui abajo hicimos esto para mejorar el dinamismo de el stock y que se viera en pantalla que se iba vaciando la maquina
         for (int i = 0; i < expendedora.getStockCoca(); i++) {
             new modelo.CocaCola().paintComponent(g, 140 + (i * 12), 100);
         }
@@ -158,5 +193,17 @@ public class PanelExpendedor extends JPanel {
         productoSeleccionado = null;
         mensajePantalla = "BIENVENIDO";
         repaint();
+    }
+
+    public void dejarProductoEnRanura(Producto producto){
+        productoEnRanura = producto;
+        repaint();
+    }
+
+    public Producto retirarProductoRanura(){
+        Producto aux = productoEnRanura;
+        productoEnRanura = null;
+        repaint();
+        return aux;
     }
 }

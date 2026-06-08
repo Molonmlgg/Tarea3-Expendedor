@@ -73,7 +73,7 @@ public class PanelPrincipal extends JPanel {
 
                         Producto producto = expendedora.getProducto();
 
-                        comprador.guardarProducto(producto);
+                        panelExpendedor.dejarProductoEnRanura(producto);
 
                         Moneda vuelto;
                         while ((vuelto = expendedora.getVuelto()) != null){
@@ -82,8 +82,8 @@ public class PanelPrincipal extends JPanel {
 
                         comprador.obtenerMonedaParaPagar(indice);
 
-
                         panelComprador.repaint();
+                        panelExpendedor.repaint();
 
                         panelComprador.limpiarSeleccion();
                         panelExpendedor.limpiarSeleccion();
@@ -107,6 +107,21 @@ public class PanelPrincipal extends JPanel {
                         e.getX(),
                         e.getY()
                 );
+                if (e.getX() >= 120 &&
+                        e.getX() <= 480 &&
+                        e.getY() >= 480 &&
+                        e.getY() <= 560) {
+
+                    Producto producto =
+                            panelExpendedor.retirarProductoRanura();
+
+                    if (producto != null) {
+
+                        comprador.guardarProducto(producto);
+
+                        panelComprador.repaint();
+                    }
+                }
             }
         });
     }
