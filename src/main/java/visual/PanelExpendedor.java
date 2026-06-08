@@ -1,11 +1,6 @@
 package visual;
 
 import modelo.Expendedora;
-import modelo.CocaCola;
-import modelo.Sprite;
-import modelo.Fanta;
-import modelo.Super8;
-import modelo.Snickers;
 import modelo.TipoProducto;
 
 import javax.swing.JPanel;
@@ -19,14 +14,6 @@ public class PanelExpendedor extends JPanel {
 
     // Referencia al modelo
     private Expendedora expendedora;
-
-    // Productos de prueba
-    private CocaCola cocaPrueba;
-    private Sprite spritePrueba;
-    private Fanta fantaPrueba;
-    private Super8 super8Prueba;
-    private Snickers snickersPrueba;
-
     // Mensaje que se muestra en la pantalla
     private String mensajePantalla;
 
@@ -43,12 +30,6 @@ public class PanelExpendedor extends JPanel {
         this.productoSeleccionado = null;
 
         this.setBackground(new Color(255, 200, 200));
-
-        this.cocaPrueba = new CocaCola();
-        this.spritePrueba = new Sprite();
-        this.fantaPrueba = new Fanta();
-        this.super8Prueba = new Super8();
-        this.snickersPrueba = new Snickers();
     }
 
     /**
@@ -109,12 +90,25 @@ public class PanelExpendedor extends JPanel {
         g.setColor(Color.BLACK);
         g.fillRect(120, 480, 360, 80);
 
-        // Productos de prueba
-        cocaPrueba.paintComponent(g, 140, 100);
-        spritePrueba.paintComponent(g, 140, 170);
-        fantaPrueba.paintComponent(g, 140, 240);
-        super8Prueba.paintComponent(g, 140, 310);
-        snickersPrueba.paintComponent(g, 140, 380);
+        for (int i = 0; i < expendedora.getStockCoca(); i++) {
+            new modelo.CocaCola().paintComponent(g, 140 + (i * 12), 100);
+        }
+
+        for (int i = 0; i < expendedora.getStockSprite(); i++) {
+            new modelo.Sprite().paintComponent(g, 140 + (i * 12), 170);
+        }
+
+        for (int i = 0; i < expendedora.getStockFanta(); i++) {
+            new modelo.Fanta().paintComponent(g, 140 + (i * 12), 240);
+        }
+
+        for (int i = 0; i < expendedora.getStockSuper8(); i++) {
+            new modelo.Super8().paintComponent(g, 140 + (i * 12), 310);
+        }
+
+        for (int i = 0; i < expendedora.getStockSnickers(); i++) {
+            new modelo.Snickers().paintComponent(g, 140 + (i * 12), 380);
+        }
     }
 
     /**

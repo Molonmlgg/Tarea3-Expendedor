@@ -114,6 +114,28 @@ public class Expendedora {
         this.productoComprado = null;
         return aux;
     }
+
+    //estos bloques los añadi para poder hacer que baje el stock de la maquina y dejemos de usar fijos.
+    public int getStockCoca() {
+        return coca.size();
+    }
+
+    public int getStockSprite() {
+        return sprite.size();
+    }
+
+    public int getStockFanta() {
+        return fanta.size();
+    }
+
+    public int getStockSuper8() {
+        return super8.size();
+    }
+
+    public int getStockSnickers() {
+        return snickers.size();
+    }
+
 }
 
 
