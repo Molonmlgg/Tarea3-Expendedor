@@ -31,4 +31,12 @@ public class Deposito<T> {
             return null;
         }
     }
+
+    /***
+     * Retorna la cantidad de elementos almacenados en el deposito.
+     * @return
+     */
+    public int size(){
+        return depo.size();
+    }
 }
