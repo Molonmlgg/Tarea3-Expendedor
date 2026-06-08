@@ -46,5 +46,15 @@ public class PanelPrincipal extends JPanel {
                 );
             }
         });
+
+        panelExpendedor.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                panelExpendedor.reaccionarClic(
+                        e.getX(),
+                        e.getY()
+                );
+            }
+        });
     }
 }
