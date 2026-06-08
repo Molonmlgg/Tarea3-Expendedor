@@ -5,6 +5,8 @@ import modelo.Expendedora;
 
 import javax.swing.JPanel;
 import java.awt.GridLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 /**
  * Panel principal de la aplicacion
@@ -33,5 +35,16 @@ public class PanelPrincipal extends JPanel {
 
         this.add(panelExpendedor);
         this.add(panelComprador);
+
+        panelComprador.addMouseListener(new MouseAdapter() {
+
+            @Override
+            public void mouseClicked(MouseEvent e){
+                panelComprador.reaccionarClic(
+                        e.getX(),
+                        e.getY()
+                );
+            }
+        });
     }
 }
