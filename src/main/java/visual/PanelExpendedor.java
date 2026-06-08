@@ -126,24 +126,43 @@ public class PanelExpendedor extends JPanel {
 
         if (x >= 390 && x <= 430 && y >= 140 && y <= 165) {
             this.mensajePantalla = "COKE";
+            productoSeleccionado = TipoProducto.COCACOLA;
         }
         else if (x >= 390 && x <= 430 && y >= 175 && y <= 200) {
             this.mensajePantalla = "SPRITE";
+            productoSeleccionado = TipoProducto.SPRITE;
         }
         else if (x >= 390 && x <= 430 && y >= 210 && y <= 235) {
             this.mensajePantalla = "FANTA";
+            productoSeleccionado = TipoProducto.FANTA;
         }
         else if (x >= 390 && x <= 430 && y >= 245 && y <= 270) {
             this.mensajePantalla = "SUPER8";
+            productoSeleccionado = TipoProducto.SUPER8;
         }
         else if (x >= 390 && x <= 430 && y >= 280 && y <= 305) {
             this.mensajePantalla = "SNICKERS";
+            productoSeleccionado = TipoProducto.SNICKERS;
         }
 
         repaint();
     }
 
+
+    /***
+     * Retorna el producto seleccionado actualmente
+     * @return producto seleccionado
+     */
     public TipoProducto getProductoSeleccionado(){
         return productoSeleccionado;
+    }
+
+    /***
+     * Limpia la seleccion del producto
+     */
+    public void limpiarSeleccion(){
+        productoSeleccionado = null;
+        mensajePantalla = "BIENVENIDO";
+        repaint();
     }
 }
