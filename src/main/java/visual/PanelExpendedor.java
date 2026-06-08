@@ -1,49 +1,141 @@
 package visual;
 
+import modelo.Expendedora;
 import modelo.CocaCola;
+import modelo.Sprite;
+import modelo.Fanta;
+import modelo.Super8;
+import modelo.Snickers;
+
 import javax.swing.JPanel;
 import java.awt.Color;
 import java.awt.Graphics;
 
 /**
- * Panel encargado de representar visualmente la máquina expendedora.
- * Contendrá los depósitos de bebidas, monedas y la lógica visual de compra.
+ * Panel encargado de representar visualmente la máquina expendedora
  */
 public class PanelExpendedor extends JPanel {
 
+    // Referencia al modelo
+    private Expendedora expendedora;
+
+    // Productos de prueba
     private CocaCola cocaPrueba;
+    private Sprite spritePrueba;
+    private Fanta fantaPrueba;
+    private Super8 super8Prueba;
+    private Snickers snickersPrueba;
+
+    // Mensaje que se muestra en la pantalla
+    private String mensajePantalla;
 
     /**
-     * Constructor del panel expendedor.
-     * Configura el color de fondo temporal para diferenciar su área en la interfaz.
+     * Constructor del panel expendedor
+     * @param expendedora Expendedora asociada al panel
      */
-    public PanelExpendedor() {
+    public PanelExpendedor(Expendedora expendedora) {
+        this.expendedora = expendedora;
+
+        this.mensajePantalla = "BIENVENIDO";
+
         this.setBackground(new Color(255, 200, 200));
+
         this.cocaPrueba = new CocaCola();
+        this.spritePrueba = new Sprite();
+        this.fantaPrueba = new Fanta();
+        this.super8Prueba = new Super8();
+        this.snickersPrueba = new Snickers();
     }
 
     /**
-     * Metodo encargado de dibujar los elementos visuales en el panel.
-     * @param g Objeto Graphics que actúa como el "pincel" para dibujar.
+     * Dibuja los elementos graficos de la maquina
+     * @param g Objeto utilizado para dibujar
      */
     @Override
     protected void paintComponent(Graphics g) {
-        super.paintComponent(g); // Dibuja el fondo rosado primero
+        super.paintComponent(g);
 
-        // 1. Dibujar la carcasa de la máquina (un rectángulo gris oscuro)
+        // Carcasa
         g.setColor(Color.DARK_GRAY);
-        // fillRect(posicionX, posicionY, ancho, alto)
         g.fillRect(100, 50, 400, 550);
 
-        // 2. Dibujar el vidrio donde se ven las bebidas (celeste)
+        // Vidrio
         g.setColor(new Color(173, 216, 230));
         g.fillRect(120, 70, 360, 380);
 
-        // 3. Dibujar la ranura por donde sale la bebida (negro)
+        // Pantalla
+        g.setColor(Color.BLACK);
+        g.fillRect(390, 80, 80, 40);
+
+        g.setColor(Color.GREEN);
+        g.drawString(mensajePantalla, 395, 105);
+
+        // Botones de selección
+        g.setColor(Color.RED);
+        g.fillRect(390, 140, 40, 25);
+
+        g.setColor(Color.WHITE);
+        g.drawString("COKE", 392, 157);
+
+        g.setColor(Color.CYAN);
+        g.fillRect(390, 175, 40, 25);
+
+        g.setColor(Color.BLACK);
+        g.drawString("SPR", 395, 192);
+
+        g.setColor(Color.ORANGE);
+        g.fillRect(390, 210, 40, 25);
+
+        g.setColor(Color.BLACK);
+        g.drawString("FAN", 395, 227);
+
+        g.setColor(Color.YELLOW);
+        g.fillRect(390, 245, 40, 25);
+
+        g.setColor(Color.BLACK);
+        g.drawString("S8", 400, 262);
+
+        g.setColor(new Color(139, 69, 19));
+        g.fillRect(390, 280, 40, 25);
+
+        g.setColor(Color.WHITE);
+        g.drawString("SNK", 395, 297);
+
+        // Ranura de retiro
         g.setColor(Color.BLACK);
         g.fillRect(120, 480, 360, 80);
-        // 4. DIBUJAR LA BEBIDA ADENTRO DEL VIDRIO
-        // Le damos las coordenadas X: 150, Y: 100 para que quede en la zona celeste
-        cocaPrueba.paintComponent(g, 150, 100);
+
+        // Productos de prueba
+        cocaPrueba.paintComponent(g, 140, 100);
+        spritePrueba.paintComponent(g, 140, 170);
+        fantaPrueba.paintComponent(g, 140, 240);
+        super8Prueba.paintComponent(g, 140, 310);
+        snickersPrueba.paintComponent(g, 140, 380);
+    }
+
+    /**
+     * Actualiza el mensaje mostrado según el botón seleccionado.
+     * @param x Coordenada X del clic.
+     * @param y Coordenada Y del clic.
+     */
+    public void reaccionarClic(int x, int y) {
+
+        if (x >= 390 && x <= 430 && y >= 140 && y <= 165) {
+            this.mensajePantalla = "COKE";
+        }
+        else if (x >= 390 && x <= 430 && y >= 175 && y <= 200) {
+            this.mensajePantalla = "SPRITE";
+        }
+        else if (x >= 390 && x <= 430 && y >= 210 && y <= 235) {
+            this.mensajePantalla = "FANTA";
+        }
+        else if (x >= 390 && x <= 430 && y >= 245 && y <= 270) {
+            this.mensajePantalla = "SUPER8";
+        }
+        else if (x >= 390 && x <= 430 && y >= 280 && y <= 305) {
+            this.mensajePantalla = "SNICKERS";
+        }
+
+        repaint();
     }
 }

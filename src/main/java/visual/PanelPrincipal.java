@@ -1,32 +1,39 @@
 package visual;
 
+import modelo.Comprador;
+import modelo.Expendedora;
+
 import javax.swing.JPanel;
-import java.awt.Color;
 import java.awt.GridLayout;
 
 /**
- * Panel principal que contiene toda la interfaz gráfica de la aplicación.
- * Administra la distribución espacial dividiendo la pantalla entre el
- * Expendedor y el Comprador.
+ * Panel principal de la aplicacion
+ * Contiene el panel del expendedor y el panel del comprador
+ *
+ * @author Matías Palacios
  */
 public class PanelPrincipal extends JPanel {
 
+    private Expendedora expendedora;
+    private Comprador comprador;
+
+    private PanelExpendedor panelExpendedor;
+    private PanelComprador panelComprador;
+
     /**
      * Constructor del panel principal.
-     * Establece un diseño de grilla (1 fila, 2 columnas) e instancia los
-     * sub-paneles correspondientes a la máquina y al usuario.
      */
     public PanelPrincipal() {
-        // Configuramos la grilla: 1 fila, 2 columnas (mitad y mitad)
+
         this.setLayout(new GridLayout(1, 2));
-        this.setBackground(Color.LIGHT_GRAY);
 
-        // Creamos los sub-paneles
-        PanelExpendedor panelExpendedor = new PanelExpendedor();
-        PanelComprador panelComprador = new PanelComprador();
+        expendedora = new Expendedora(5);
+        comprador = new Comprador();
 
-        // Los agregamos al panel principal
-        this.add(panelExpendedor); // Se irá a la mitad izquierda
-        this.add(panelComprador);  // Se irá a la mitad derecha
+        panelExpendedor = new PanelExpendedor(expendedora);
+        panelComprador = new PanelComprador();
+
+        this.add(panelExpendedor);
+        this.add(panelComprador);
     }
 }
