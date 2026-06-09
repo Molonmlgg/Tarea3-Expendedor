@@ -13,13 +13,13 @@ import java.awt.Graphics;
  */
 public class PanelExpendedor extends JPanel {
 
-    
+
     private Expendedora expendedora;
 
     private String mensajePantalla;
 
     private TipoProducto productoSeleccionado;
-    private java.util.ArrayList<Producto> productosEnRanura;;
+    private Producto productoEnRanura;
 
     // Instancias de los paneles visuales que dibujarán cada fila
     private PanelDeposito panelDepoCoca;
@@ -30,6 +30,7 @@ public class PanelExpendedor extends JPanel {
 
     /**
      * Constructor del panel expendedor
+     *
      * @param expendedora Expendedora asociada al panel
      */
     public PanelExpendedor(Expendedora expendedora) {
@@ -37,7 +38,7 @@ public class PanelExpendedor extends JPanel {
 
         this.mensajePantalla = "BIENVENIDO";
         this.productoSeleccionado = null;
-        this.productosEnRanura = new java.util.ArrayList<>();
+        this.productoEnRanura = null;
 
         this.setBackground(new Color(255, 200, 200));
 
@@ -52,6 +53,7 @@ public class PanelExpendedor extends JPanel {
 
     /**
      * Dibuja los elementos graficos de la maquina
+     *
      * @param g Objeto utilizado para dibujar
      */
     @Override
@@ -104,12 +106,12 @@ public class PanelExpendedor extends JPanel {
         g.setColor(Color.WHITE);
         g.drawString("SNK", 395, 297);
 
-        // Ranura de retiro
-        for (int i = 0; i < productosEnRanura.size(); i++) {
-            Producto p = productosEnRanura.get(i);
-            Color color = Color.BLACK;
+        g.setColor(Color.BLACK);
+        g.fillRect(120, 480, 360, 80);
 
-            switch (p.getTipo()){
+        if (productoEnRanura != null) {
+            Color color = Color.GRAY;
+            switch (productoEnRanura.getTipo()) {
                 case COCACOLA:
                     color = Color.RED;
                     break;
@@ -127,8 +129,8 @@ public class PanelExpendedor extends JPanel {
                     break;
             }
 
-            // El factor (i * 45) hace que cada nuevo producto se dibuje 45 píxeles más a la derecha
-            p.paintComponent(g, 130 + (i * 45), 490, color);
+            // Se dibuja el único producto en la posición central de la ranura
+            productoEnRanura.paintComponent(g, 200, 490, color);
         }
 
         // Se delega correctamente el dibujo del stock a cada panel correspondiente
@@ -141,6 +143,7 @@ public class PanelExpendedor extends JPanel {
 
     /**
      * Actualiza el mensaje mostrado según el botón seleccionado.
+     *
      * @param x Coordenada X del clic.
      * @param y Coordenada Y del clic.
      */
@@ -149,20 +152,16 @@ public class PanelExpendedor extends JPanel {
         if (x >= 390 && x <= 430 && y >= 140 && y <= 165) {
             this.mensajePantalla = "COKE";
             productoSeleccionado = TipoProducto.COCACOLA;
-        }
-        else if (x >= 390 && x <= 430 && y >= 175 && y <= 200) {
+        } else if (x >= 390 && x <= 430 && y >= 175 && y <= 200) {
             this.mensajePantalla = "SPRITE";
             productoSeleccionado = TipoProducto.SPRITE;
-        }
-        else if (x >= 390 && x <= 430 && y >= 210 && y <= 235) {
+        } else if (x >= 390 && x <= 430 && y >= 210 && y <= 235) {
             this.mensajePantalla = "FANTA";
             productoSeleccionado = TipoProducto.FANTA;
-        }
-        else if (x >= 390 && x <= 430 && y >= 245 && y <= 270) {
+        } else if (x >= 390 && x <= 430 && y >= 245 && y <= 270) {
             this.mensajePantalla = "SUPER8";
             productoSeleccionado = TipoProducto.SUPER8;
-        }
-        else if (x >= 390 && x <= 430 && y >= 280 && y <= 305) {
+        } else if (x >= 390 && x <= 430 && y >= 280 && y <= 305) {
             this.mensajePantalla = "SNICKERS";
             productoSeleccionado = TipoProducto.SNICKERS;
         }
@@ -175,35 +174,36 @@ public class PanelExpendedor extends JPanel {
      * Retorna el producto seleccionado actualmente
      * @return producto seleccionado
      */
-    public TipoProducto getProductoSeleccionado(){
+    public TipoProducto getProductoSeleccionado() {
         return productoSeleccionado;
     }
 
     /***
      * Limpia la seleccion del producto
      */
-    public void limpiarSeleccion(){
+    public void limpiarSeleccion() {
         productoSeleccionado = null;
         mensajePantalla = "BIENVENIDO";
         repaint();
     }
 
-    public void dejarProductoEnRanura(Producto producto){
-        if (producto != null) {
-            productosEnRanura.add(producto);
-            repaint();
-        }
+    public void dejarProductoEnRanura(Producto producto) {
+        this.productoEnRanura = producto;
+        repaint();
     }
 
     public Producto retirarProductoRanura() {
-        if (!productosEnRanura.isEmpty()) {
-            Producto aux = productosEnRanura.remove(0);
-            repaint();
-            return aux;
-        }
-        return null;
+        Producto aux = this.productoEnRanura;
+        this.productoEnRanura = null; // Queda vacía inmediatamente
+        repaint();
+        return aux;
     }
-    public int getCantidadEnRanura() {
-        return productosEnRanura.size();
+
+    /**
+     * Revisa si la ranura ya contiene un producto esperando ser retirado.
+     * Reemplaza la lógica del ArrayList para cumplir la pauta.
+     */
+    public boolean isRanuraOcupada() {
+        return this.productoEnRanura != null;
     }
 }

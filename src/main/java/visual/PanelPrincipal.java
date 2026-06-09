@@ -49,11 +49,10 @@ public class PanelPrincipal extends JPanel {
 
                 if (panelComprador.isComprarPresionado()) {
 
-                    // 1. Freno: ¿La ranura está llena? (Límite visual: 5 productos)
-                    if (panelExpendedor.getCantidadEnRanura() >= 8) {
-                        panelComprador.setMensajeAviso("¡No queda más espacio para sacar! Guárdalo en tu mochila.");
+                    if (panelExpendedor.isRanuraOcupada()) {
+                        panelComprador.setMensajeAviso("¡Retira tu producto antes de comprar otro!");
                         panelComprador.limpiarBotonComprar();
-                        return;
+                        return; 
                     }
 
                     // 2. Freno: ¿El monedero está lleno? (Límite visual: 10 monedas)
