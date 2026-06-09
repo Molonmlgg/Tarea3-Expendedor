@@ -18,6 +18,7 @@ public class PanelComprador extends JPanel {
     private Comprador comprador;
     private int monedaSeleccionada;
     private boolean comprarPresionado;
+    private String mensajeAviso = "";
 
     /**
      * Constructor del panel comprador.
@@ -87,7 +88,7 @@ public class PanelComprador extends JPanel {
         g.drawString("COMPRAR", 60, 352);
 
         g.drawString("MOCHILA", 30, 380);
-        g.drawRect(30, 400, 300, 150);
+        g.drawRect(30, 400, 140, 150);
 
         ArrayList<Producto> mochila = comprador.getProductosComprados();
 
@@ -99,6 +100,8 @@ public class PanelComprador extends JPanel {
                     425 + (i*20)
             );
         }
+        g.setColor(Color.RED);
+        g.drawString(mensajeAviso, 30, 580);
 
         g.setColor(Color.ORANGE);
         g.fillRect(160, 330, 120, 35);
@@ -170,5 +173,9 @@ public class PanelComprador extends JPanel {
 
     public void limpiarBotonComprar(){
         comprarPresionado = false;
+    }
+    public void setMensajeAviso(String mensaje) {
+        this.mensajeAviso = mensaje;
+        repaint();
     }
 }

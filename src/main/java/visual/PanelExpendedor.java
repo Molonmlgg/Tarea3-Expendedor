@@ -203,4 +203,7 @@ public class PanelExpendedor extends JPanel {
         }
         return null;
     }
+    public int getCantidadEnRanura() {
+        return productosEnRanura.size();
+    }
 }
