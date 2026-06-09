@@ -33,9 +33,8 @@ public class PanelComprador extends JPanel {
     }
 
     /**
-     * Dibuja el contenido del comprador
-     *
-     * @param g objeto gráfico
+     * Dibuja tod el contenido visual del comprador (monedero, botones y mochila).
+     * @param g Objeto gráfico usado para pintar en pantalla.
      */
     @Override
     protected void paintComponent(Graphics g) {
@@ -51,13 +50,18 @@ public class PanelComprador extends JPanel {
             int columna = i % 2;
             int fila = i / 2;
 
-
+            // Calculamos la posición
             int xVisual = 30 + (columna * 120);
             int yVisual = 60 + (fila * 45);
+            moneda.setXY(xVisual, yVisual);
+
+            // Resaltar la moneda si está seleccionada
             if (i == monedaSeleccionada) {
                 g.setColor(Color.RED);
                 g.drawRect(xVisual - 5, yVisual - 5, 120, 45);
             }
+
+            // Asignar color según el valor de la moneda
             if (moneda.getValor() == 100) {
                 g.setColor(new Color(200, 200, 200)); // Gris plata
             } else if (moneda.getValor() == 500) {
@@ -70,39 +74,48 @@ public class PanelComprador extends JPanel {
 
             // Pintar el fondo de la moneda
             g.fillRect(xVisual, yVisual, 110, 35);
-
             g.setColor(Color.BLACK);
-
             g.drawRect(xVisual, yVisual, 110, 35);
 
+            // Dibujar el texto de la moneda
             g.drawString(
                     "$" + moneda.getValor() + " (S:" + moneda.getSerie() + ")",
                     xVisual + 5,
                     yVisual + 22
             );
         }
+
+        // Dibujar botón de compra
         g.setColor(Color.GREEN);
         g.fillRect(30,330,120,35);
         g.setColor(Color.BLACK);
         g.drawRect(30,330,120,35);
         g.drawString("COMPRAR", 60, 352);
 
+        // Dibujar la mochila del comprador
         g.drawString("MOCHILA", 30, 380);
         g.drawRect(30, 400, 140, 150);
 
         ArrayList<Producto> mochila = comprador.getProductosComprados();
 
+        // Reposicionar y dibujar los productos guardados en la mochila
         for (int i = 0; i < mochila.size(); i++){
             Producto producto = mochila.get(i);
+
+            // Asignar posiciones a los productos
+            producto.setXY(40, 425 + (i * 20));
             g.drawString(
                     producto.getTipo() + " #" + producto.getSerie(),
                     40,
                     425 + (i*20)
             );
         }
+
+        // Mensaje de advertencias dinámicas
         g.setColor(Color.RED);
         g.drawString(mensajeAviso, 30, 580);
 
+        // Dibujar botón de combinar sencillo
         g.setColor(Color.ORANGE);
         g.fillRect(160, 330, 120, 35);
         g.setColor(Color.BLACK);
@@ -111,13 +124,15 @@ public class PanelComprador extends JPanel {
     }
 
     /**
-     * Selecciona una moneda según la posición del clic.
-     * @param x
-     * @param y
+     * Procesa los clics del usuario para seleccionar monedas o presionar botones.
+     * Ahora utiliza directamente las coordenadas guardadas en cada moneda.
+     * @param x Coordenada X del clic del mouse.
+     * @param y Coordenada Y del clic del mouse.
      */
     public void reaccionarClic(int x, int y) {
         ArrayList<Moneda> monedero = comprador.getMonedero();
 
+        // Verificar si se hizo clic sobre alguna moneda usando sus propias coordenadas
         for (int i = 0; i < monedero.size(); i++) {
             int columna = i % 2;
             int fila = i / 2;
@@ -134,6 +149,8 @@ public class PanelComprador extends JPanel {
                 return;
             }
         }
+
+        // Clic en botón de comprar
         if (x >= 30 &&
                 x <= 150 &&
                 y >= 330 &&
@@ -141,6 +158,8 @@ public class PanelComprador extends JPanel {
 
             comprarPresionado = true;
         }
+
+        // Clic en botón de combinar monedas
         if (x >= 160 &&
                 x <= 280 &&
                 y >= 330 &&
@@ -151,14 +170,16 @@ public class PanelComprador extends JPanel {
         }
     }
 
-    /***
-     * bloque retorna el indice de la moneda seleccionada
-     * @return indice seleccionado
+    /**
+     * @return El índice de la moneda que el usuario seleccionó actualmente.
      */
     public int getMonedaSeleccionada(){
         return monedaSeleccionada;
     }
 
+    /**
+     * @return Verdadero si el usuario hizo clic en el botón de comprar.
+     */
     public boolean isComprarPresionado(){
         return comprarPresionado;
     }
@@ -171,9 +192,17 @@ public class PanelComprador extends JPanel {
         repaint();
     }
 
+    /**
+     * Resetea el estado del botón de compra.
+     */
     public void limpiarBotonComprar(){
         comprarPresionado = false;
     }
+
+    /**
+     * Establece un mensaje de error o aviso para mostrar en pantalla.
+     * @param mensaje El texto que se le mostrará al usuario.
+     */
     public void setMensajeAviso(String mensaje) {
         this.mensajeAviso = mensaje;
         repaint();

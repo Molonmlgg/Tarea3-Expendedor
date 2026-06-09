@@ -8,6 +8,8 @@ import java.awt.Graphics;
 public abstract class Moneda implements Comparable<Moneda> {
     private static int contador = 1;
     private int serie;
+    private int x;
+    private int y;
 
     /**
      * Constructor de la moneda (serie)
@@ -44,6 +46,30 @@ public abstract class Moneda implements Comparable<Moneda> {
      * @return serie de moneda*/
     public int getSerie() {
         return this.serie;
+    }
+
+    /**
+     * Asigna la posición de la moneda en la pantalla.
+     * @param x Coordenada X.
+     * @param y Coordenada Y.
+     */
+    public void setXY(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    /**
+     * @return Coordenada X actual de la moneda.
+     */
+    public int getX() {
+        return this.x;
+    }
+
+    /**
+     * @return Coordenada Y actual de la moneda.
+     */
+    public int getY() {
+        return this.y;
     }
 
     /**

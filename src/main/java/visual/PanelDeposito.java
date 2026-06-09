@@ -27,18 +27,35 @@ public class PanelDeposito {
     }
 
     /**
-     * Iterador visual que recorre los productos existentes en el depósito
-     * y delega en ellos su propio dibujado, calculando un desplazamiento horizontal.
-     * * @param g El contexto gráfico utilizado para dibujar.
+     * Recorre el depósito para actualizar las coordenadas internas de cada
+     * producto mediante el metodo setXY requerido en la pauta.
      */
-    protected void paintComponent(Graphics g) {
+    public void actualizarPosiciones() {
         int totalProductos = deposito.size();
         for (int i = totalProductos - 1; i >= 0; i--) {
             Producto p = deposito.get(i);
-            int posicionVisual = (totalProductos - 1) - i;
-            int xVisual = this.xInicial + (posicionVisual * 20);
-            p.paintComponent(g, xVisual , this.yInicial);
+            if (p != null) {
+                int posicionVisual = (totalProductos - 1) - i;
+                int xVisual = this.xInicial + (posicionVisual * 20);
+                p.setXY(xVisual, this.yInicial);
+            }
         }
     }
-        }
 
+    /**
+     * Dibuja los productos utilizando las coordenadas almacenadas en ellos.
+     * @param g El contexto gráfico utilizado para dibujar.
+     */
+    protected void paintComponent(Graphics g) {
+        // Primero forzamos el reposicionamiento mediante setXY
+        actualizarPosiciones();
+
+        // Ahora pintamos usando los getters del propio producto
+        for (int i = 0; i < deposito.size(); i++) {
+            Producto p = deposito.get(i);
+            if (p != null) {
+                p.paintComponent(g, p.getX(), p.getY());
+            }
+        }
+    }
+}

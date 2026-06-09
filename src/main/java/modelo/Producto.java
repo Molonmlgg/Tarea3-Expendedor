@@ -11,6 +11,8 @@ public abstract class Producto {
     private int serie;
 
     private TipoProducto tipo;
+    private int x;
+    private int y;
 
     /**
      * Constructor del producto
@@ -48,6 +50,29 @@ public abstract class Producto {
      */
     public int getSerie() {
         return this.serie;
+    }
+
+    /**
+     * Asigna la posición de la vista del producto en la pantalla.
+     * @param x Coordenada X.
+     * @param y Coordenada Y.
+     */
+    public void setXY(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+    /**
+     * @return Coordenada X actual del producto.
+     */
+    public int getX() {
+        return this.x;
+    }
+
+    /**
+     * @return Coordenada Y actual del producto.
+     */
+    public int getY() {
+        return this.y;
     }
 
     /**
