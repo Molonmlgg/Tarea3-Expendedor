@@ -57,6 +57,18 @@ public class PanelComprador extends JPanel {
                 g.setColor(Color.RED);
                 g.drawRect(xVisual - 5, yVisual - 5, 120, 45);
             }
+            if (moneda.getValor() == 100) {
+                g.setColor(new Color(200, 200, 200)); // Gris plata
+            } else if (moneda.getValor() == 500) {
+                g.setColor(new Color(255, 215, 0)); // Dorado
+            } else if (moneda.getValor() == 1000) {
+                g.setColor(new Color(144, 238, 144)); // Verde billete
+            } else {
+                g.setColor(Color.WHITE); // Por defecto
+            }
+
+            // Pintar el fondo de la moneda
+            g.fillRect(xVisual, yVisual, 110, 35);
 
             g.setColor(Color.BLACK);
 

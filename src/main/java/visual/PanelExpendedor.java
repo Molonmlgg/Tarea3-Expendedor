@@ -114,7 +114,7 @@ public class PanelExpendedor extends JPanel {
                     color = Color.RED;
                     break;
                 case SPRITE:
-                    color = Color.GREEN;
+                    color = Color.CYAN;
                     break;
                 case FANTA:
                     color = Color.ORANGE;
