@@ -103,23 +103,30 @@ public class PanelPrincipal extends JPanel {
         panelExpendedor.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                panelExpendedor.reaccionarClic(
-                        e.getX(),
-                        e.getY()
-                );
-                if (e.getX() >= 120 &&
-                        e.getX() <= 480 &&
-                        e.getY() >= 480 &&
-                        e.getY() <= 560) {
+                int x = e.getX();
+                int y = e.getY();
 
-                    Producto producto =
-                            panelExpendedor.retirarProductoRanura();
+                // Procesa primero si se seleccionó algún botón de producto
+                panelExpendedor.reaccionarClic(x, y);
+
+                // Si el clic es dentro de la ranura de retiro, extrae el producto
+                if (x >= 120 && x <= 480 && y >= 480 && y <= 560) {
+
+                    Producto producto = panelExpendedor.retirarProductoRanura();
 
                     if (producto != null) {
-
                         comprador.guardarProducto(producto);
-
                         panelComprador.repaint();
+                    }
+                }
+                // Si se hace clic dentro de la carcasa de la máquina pero fuera de la botonera, se rellena
+                else if (x >= 100 && x <= 500 && y >= 50 && y <= 600) {
+                    boolean enBotonera = (x >= 390 && x <= 430 && y >= 140 && y <= 305);
+
+                    if (!enBotonera) {
+                        expendedora.rellenarDepositosVacios();
+                        panelExpendedor.repaint();
+                        System.out.println("Depósitos vacíos rellenados automáticamente");
                     }
                 }
             }
