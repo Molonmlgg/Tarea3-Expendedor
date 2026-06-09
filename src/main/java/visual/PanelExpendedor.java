@@ -21,6 +21,13 @@ public class PanelExpendedor extends JPanel {
     private TipoProducto productoSeleccionado;
     private Producto productoEnRanura;
 
+    // Instancias de los paneles visuales que dibujarán cada fila
+    private PanelDeposito panelDepoCoca;
+    private PanelDeposito panelDepoSprite;
+    private PanelDeposito panelDepoFanta;
+    private PanelDeposito panelDepoSuper8;
+    private PanelDeposito panelDepoSnickers;
+
     /**
      * Constructor del panel expendedor
      * @param expendedora Expendedora asociada al panel
@@ -33,6 +40,14 @@ public class PanelExpendedor extends JPanel {
         this.productoEnRanura = null;
 
         this.setBackground(new Color(255, 200, 200));
+
+        // Inicializamos las vistas pasándoles el depósito real y sus coordenadas iniciales
+        this.panelDepoCoca = new PanelDeposito(expendedora.getDepositoCoca(), 140, 100);
+        this.panelDepoSprite = new PanelDeposito(expendedora.getDepositoSprite(), 140, 170);
+        this.panelDepoFanta = new PanelDeposito(expendedora.getDepositoFanta(), 140, 240);
+        this.panelDepoSuper8 = new PanelDeposito(expendedora.getDepositoSuper8(), 140, 310);
+        this.panelDepoSnickers = new PanelDeposito(expendedora.getDepositoSnickers(), 140, 380);
+
     }
 
     /**
@@ -124,26 +139,12 @@ public class PanelExpendedor extends JPanel {
             );
         }
 
-        //de aqui abajo hicimos esto para mejorar el dinamismo de el stock y que se viera en pantalla que se iba vaciando la maquina
-        for (int i = 0; i < expendedora.getStockCoca(); i++) {
-            new modelo.CocaCola().paintComponent(g, 140 + (i * 12), 100);
-        }
-
-        for (int i = 0; i < expendedora.getStockSprite(); i++) {
-            new modelo.Sprite().paintComponent(g, 140 + (i * 12), 170);
-        }
-
-        for (int i = 0; i < expendedora.getStockFanta(); i++) {
-            new modelo.Fanta().paintComponent(g, 140 + (i * 12), 240);
-        }
-
-        for (int i = 0; i < expendedora.getStockSuper8(); i++) {
-            new modelo.Super8().paintComponent(g, 140 + (i * 12), 310);
-        }
-
-        for (int i = 0; i < expendedora.getStockSnickers(); i++) {
-            new modelo.Snickers().paintComponent(g, 140 + (i * 12), 380);
-        }
+        // Se delega correctamente el dibujo del stock a cada panel correspondiente
+        panelDepoCoca.paintComponent(g);
+        panelDepoSprite.paintComponent(g);
+        panelDepoFanta.paintComponent(g);
+        panelDepoSuper8.paintComponent(g);
+        panelDepoSnickers.paintComponent(g);
     }
 
     /**

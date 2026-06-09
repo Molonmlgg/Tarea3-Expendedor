@@ -136,6 +136,78 @@ public class Expendedora {
         return snickers.size();
     }
 
+    /**
+     * Obtiene el depósito que almacena los productos de tipo CocaCola.
+     * @return El depósito que contiene las instancias de CocaCola.
+     */
+    public Deposito<Producto> getDepositoCoca() {
+        return coca;
+    }
+
+    /**
+     * Obtiene el depósito que almacena los productos de tipo Sprite.
+     * @return El depósito que contiene las instancias de Sprite.
+     */
+    public Deposito<Producto> getDepositoSprite() {
+        return sprite;
+    }
+
+    /**
+     * Obtiene el depósito que almacena los productos de tipo Fanta.
+     * @return El depósito que contiene las instancias de Fanta.
+     */
+    public Deposito<Producto> getDepositoFanta() {
+        return fanta;
+    }
+
+    /**
+     * Obtiene el depósito que almacena los productos de tipo Super8.
+     * @return El depósito que contiene las instancias de Super8.
+     */
+    public Deposito<Producto> getDepositoSuper8() {
+        return super8;
+    }
+
+    /**
+     * Obtiene el depósito que almacena los productos de tipo Snickers.
+     * @return El depósito que contiene las instancias de Snickers.
+     */
+    public Deposito<Producto> getDepositoSnickers() {
+        return snickers;
+    }
+    /**
+     * Revisa cada uno de los depósitos de productos de la máquina expendedora.
+     * Si detecta que alguno de ellos está completamente vacío (stock igual a 0),
+     * lo vuelve a rellenar automáticamente agregando 5 unidades de su respectivo producto.
+     */
+    public void rellenarDepositosVacios() {
+        if (coca.size() == 0) {
+            for (int i = 0; i < 5; i++) {
+                coca.addItem(new CocaCola());
+            }
+        }
+        if (sprite.size() == 0) {
+            for (int i = 0; i < 5; i++) {
+                sprite.addItem(new Sprite());
+            }
+        }
+        if (fanta.size() == 0) {
+            for (int i = 0; i < 5; i++) {
+                fanta.addItem(new Fanta());
+            }
+        }
+        if (super8.size() == 0) {
+            for (int i = 0; i < 5; i++) {
+                super8.addItem(new Super8());
+            }
+        }
+        if (snickers.size() == 0) {
+            for (int i = 0; i < 5; i++) {
+                snickers.addItem(new Snickers());
+            }
+        }
+    }
+
 }
 
 
