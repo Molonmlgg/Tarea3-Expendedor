@@ -40,6 +40,7 @@ public abstract class Producto {
     public TipoProducto getTipo() {
         return tipo;
     }
+
     /**
      * Retorna la serie del producto
      *
@@ -54,6 +55,7 @@ public abstract class Producto {
      * Al ser un metodo abstracto, delega la responsabilidad a cada subclase
      * (como CocaCola o Super8) para que implemente su propia lógica visual.
      * * @param g El contexto gráfico de Swing utilizado para dibujar.
+     *
      * @param x La coordenada X de la pantalla donde se dibujará el producto.
      * @param y La coordenada Y de la pantalla donde se dibujará el producto.
      */
@@ -61,21 +63,40 @@ public abstract class Producto {
 
     /**
      * Dibuja la representación gráfica del producto.
+     *
      * @param g     El contexto gráfico (Graphics) utilizado para dibujar en el panel.
      * @param x     La coordenada X donde se posicionará el producto.
      * @param y     La coordenada Y donde se posicionará el producto.
      * @param color El color representativo asignado al tipo de producto.
      */
     public void paintComponent(Graphics g, int x, int y, Color color) {
-        // Dibuja el cuerpo del producto (rectángulo)
+
         g.setColor(color);
-        g.fillRect(x, y, 40, 60);
-
-        // Dibuja el borde exterior
+        g.fillRect(x, y, 30, 45);
         g.setColor(Color.BLACK);
-        g.drawRect(x, y, 40, 60);
-
-        // Dibuja el número de serie al centro
-        g.drawString("S:" + this.getSerie(), x + 5, y + 35);
+        g.drawRect(x, y, 30, 45);
+        String nombreCorto = "";
+        if (this.getTipo() != null) {
+            switch (this.getTipo()) {
+                case COCACOLA:
+                    nombreCorto = "COKE";
+                    break;
+                case SPRITE:
+                    nombreCorto = "SPR";
+                    break;
+                case FANTA:
+                    nombreCorto = "FAN";
+                    break;
+                case SUPER8:
+                    nombreCorto = "S8";
+                    break;
+                case SNICKERS:
+                    nombreCorto = "SNK";
+                    break;
+            }
+        }
+        g.setColor(Color.BLACK);
+        g.drawString(nombreCorto, x + 2, y + 15);
+        g.drawString("S:" + this.getSerie(), x + 2, y + 30);
     }
 }
