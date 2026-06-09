@@ -47,17 +47,25 @@ public class PanelComprador extends JPanel {
         for (int i = 0; i < monedero.size(); i++) {
             Moneda moneda = monedero.get(i);
 
+            int columna = i % 2;
+            int fila = i / 2;
+
+
+            int xVisual = 30 + (columna * 120);
+            int yVisual = 60 + (fila * 45);
             if (i == monedaSeleccionada) {
                 g.setColor(Color.RED);
-                g.drawRect(25, 55 + (i * 50), 110, 45);
+                g.drawRect(xVisual - 5, yVisual - 5, 120, 45);
             }
 
             g.setColor(Color.BLACK);
-            g.drawRect(30, 60 + (i * 50), 110, 35);
+
+            g.drawRect(xVisual, yVisual, 110, 35);
+
             g.drawString(
                     "$" + moneda.getValor() + " (S:" + moneda.getSerie() + ")",
-                    35,
-                    82 + (i * 50)
+                    xVisual + 5,
+                    yVisual + 22
             );
         }
         g.setColor(Color.GREEN);
@@ -96,11 +104,13 @@ public class PanelComprador extends JPanel {
         ArrayList<Moneda> monedero = comprador.getMonedero();
 
         for (int i = 0; i < monedero.size(); i++) {
-            int monedaX = 30;
-            int monedaY = 60 + (i * 50);
+            int columna = i % 2;
+            int fila = i / 2;
+            int monedaX = 30 + (columna * 120);
+            int monedaY = 60 + (fila * 45);
 
             if (x >= monedaX &&
-                    x <= monedaX + 100 &&
+                    x <= monedaX + 110 &&
                     y >= monedaY &&
                     y <= monedaY + 35) {
 
