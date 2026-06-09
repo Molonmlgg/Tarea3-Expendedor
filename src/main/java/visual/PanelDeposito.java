@@ -31,13 +31,14 @@ public class PanelDeposito {
      * y delega en ellos su propio dibujado, calculando un desplazamiento horizontal.
      * * @param g El contexto gráfico utilizado para dibujar.
      */
-    public void paintComponent(Graphics g) {
-        for (int i = 0; i < deposito.size(); i++) {
-            Producto p = deposito.getElemento(i);
-            if (p != null) {
-                // Llama al metodo paintComponent del producto particular (polimorfismo)
-                p.paintComponent(g, xInicial + (i * 12), yInicial);
-            }
+    protected void paintComponent(Graphics g) {
+        int totalProductos = deposito.size();
+        for (int i = totalProductos - 1; i >= 0; i--) {
+            Producto p = deposito.get(i);
+            int posicionVisual = (totalProductos - 1) - i;
+            int xVisual = this.xInicial + (posicionVisual * 20);
+            p.paintComponent(g, xVisual , this.yInicial);
         }
     }
-}
+        }
+

@@ -49,5 +49,8 @@ public class Deposito<T> {
         }
         return null;
     }
+    public T get(int i) {
+        return depo.get(i);
+    }
 
 }
