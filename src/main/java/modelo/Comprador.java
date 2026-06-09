@@ -67,14 +67,26 @@ public class Comprador {
         }
     }
 
+    /**
+     * Obtiene la lista completa de monedas que posee el comprador.
+     * @return El ArrayList que representa el monedero.
+     */
     public ArrayList<Moneda> getMonedero() {
         return monedero;
     }
 
+    /**
+     * Obtiene la lista completa de productos que el comprador ha guardado.
+     * @return El ArrayList que representa la mochila de productos.
+     */
     public ArrayList<Producto> getProductosComprados() {
         return productosComprados;
     }
 
+    /**
+     * Revisa el monedero y fusiona las monedas de menor valor en monedas
+     * de mayor denominación (Ej: 5 de 100 se convierten en 1 de 500).
+     */
     public void agruparMonedas() {
         int contador100 = 0;
         int contador500 = 0;
@@ -99,6 +111,11 @@ public class Comprador {
         this.ordenarMonedero();
     }
 
+    /**
+     * Metodo auxiliar privado para eliminar una cantidad específica de monedas de cierto valor.
+     * @param valor El valor de las monedas a buscar.
+     * @param cantidad La cantidad exacta de monedas a eliminar.
+     */
     private void eliminarMonedasPorValor(int valor, int cantidad) {
         int eliminadas = 0;
         for (int i = monedero.size() - 1; i >= 0; i--) {
@@ -109,6 +126,10 @@ public class Comprador {
             }
         }
     }
+
+    /**
+     * Ordena internamente el ArrayList de monedas de mayor a menor valor.
+     */
     public void ordenarMonedero() {
         if (this.monedero != null && !this.monedero.isEmpty()) {
             this.monedero.sort((m1, m2) -> Integer.compare(m2.getValor(), m1.getValor()));

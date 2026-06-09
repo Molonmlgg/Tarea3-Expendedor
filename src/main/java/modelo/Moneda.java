@@ -8,6 +8,7 @@ import java.awt.Graphics;
 public abstract class Moneda implements Comparable<Moneda> {
     private static int contador = 1;
     private int serie;
+
     /**
      * Constructor de la moneda (serie)
      *
@@ -20,11 +21,19 @@ public abstract class Moneda implements Comparable<Moneda> {
     /** @return El valor entero de la moneda. */
     public abstract int getValor();
 
+    /**
+     * Compara el valor de esta moneda con otra para ordenarlas.
+     * @param m Moneda a comparar.
+     * @return resultado de la comparacion.
+     */
     @Override
     public int compareTo(Moneda m) {
         return Integer.compare(this.getValor(), m.getValor());
     }
 
+    /**
+     * @return Texto con los datos de la moneda.
+     */
     @Override
     public String toString() {
         return "Moneda de: " + this.getValor() + " (Serie: " + this.getSerie() + ")";

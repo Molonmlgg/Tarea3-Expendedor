@@ -117,23 +117,42 @@ public class Expendedora {
         return null;
     }
 
-    //estos bloques los añadi para poder hacer que baje el stock de la maquina y dejemos de usar fijos.
+    /**
+     * Obtiene la cantidad actual de CocaCola en el depósito de la máquina.
+     * @return El número de unidades disponibles.
+     */
     public int getStockCoca() {
         return coca.size();
     }
 
+    /**
+     * Obtiene la cantidad actual de Sprite en el depósito de la máquina.
+     * @return El número de unidades disponibles.
+     */
     public int getStockSprite() {
         return sprite.size();
     }
 
+    /**
+     * Obtiene la cantidad actual de Fanta en el depósito de la máquina.
+     * @return El número de unidades disponibles.
+     */
     public int getStockFanta() {
         return fanta.size();
     }
 
+    /**
+     * Obtiene la cantidad actual de Super8 en el depósito de la máquina.
+     * @return El número de unidades disponibles.
+     */
     public int getStockSuper8() {
         return super8.size();
     }
 
+    /**
+     * Obtiene la cantidad actual de Snickers en el depósito de la máquina.
+     * @return El número de unidades disponibles.
+     */
     public int getStockSnickers() {
         return snickers.size();
     }
@@ -177,6 +196,7 @@ public class Expendedora {
     public Deposito<Producto> getDepositoSnickers() {
         return snickers;
     }
+
     /**
      * Revisa cada uno de los depósitos de productos de la máquina expendedora.
      * Si detecta que alguno de ellos está completamente vacío (stock igual a 0),

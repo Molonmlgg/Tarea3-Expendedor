@@ -8,6 +8,10 @@ import java.util.ArrayList;
 public class Deposito<T> {
     private ArrayList<T> depo;
 
+    /**
+     * Constructor del Depósito.
+     * Inicializa el ArrayList vacío preparado para almacenar los elementos.
+     */
     public Deposito() {
         this.depo = new ArrayList<T>();
     }
@@ -49,6 +53,11 @@ public class Deposito<T> {
         }
         return null;
     }
+    /**
+     * Obtiene directamente un elemento del depósito en la posición dada, sin verificaciones extra.
+     * @param i El índice del elemento a obtener.
+     * @return El elemento de tipo T almacenado en la posición i.
+     */
     public T get(int i) {
         return depo.get(i);
     }
