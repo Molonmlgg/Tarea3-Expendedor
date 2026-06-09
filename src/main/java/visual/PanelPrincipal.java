@@ -52,7 +52,7 @@ public class PanelPrincipal extends JPanel {
                     if (panelExpendedor.isRanuraOcupada()) {
                         panelComprador.setMensajeAviso("¡Retira tu producto antes de comprar otro!");
                         panelComprador.limpiarBotonComprar();
-                        return; 
+                        return;
                     }
 
                     // 2. Freno: ¿El monedero está lleno? (Límite visual: 10 monedas)
@@ -149,7 +149,7 @@ public class PanelPrincipal extends JPanel {
                     if (!enBotonera) {
                         expendedora.rellenarDepositosVacios();
                         panelExpendedor.repaint();
-                        System.out.println("Depósitos vacíos rellenados automáticamente");
+                        System.out.println("Comprobando stock... se rellenaron los depósitos que estaban en 0.");
                     }
                 }
             }

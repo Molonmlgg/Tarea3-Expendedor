@@ -74,38 +74,38 @@ public class PanelExpendedor extends JPanel {
 
         g.setColor(Color.GREEN);
         g.drawString(mensajePantalla, 395, 105);
-
-        // Botones de selección
+    //botones y precios
         g.setColor(Color.RED);
         g.fillRect(390, 140, 40, 25);
-
         g.setColor(Color.WHITE);
         g.drawString("COKE", 392, 157);
+        g.setColor(Color.BLACK);
+        g.drawString("$" + TipoProducto.COCACOLA.getPrecio(), 435, 157);
 
         g.setColor(Color.CYAN);
         g.fillRect(390, 175, 40, 25);
-
         g.setColor(Color.BLACK);
         g.drawString("SPR", 395, 192);
+        g.drawString("$" + TipoProducto.SPRITE.getPrecio(), 435, 192);
 
         g.setColor(Color.ORANGE);
         g.fillRect(390, 210, 40, 25);
-
         g.setColor(Color.BLACK);
         g.drawString("FAN", 395, 227);
+        g.drawString("$" + TipoProducto.FANTA.getPrecio(), 435, 227);
 
         g.setColor(Color.YELLOW);
         g.fillRect(390, 245, 40, 25);
-
         g.setColor(Color.BLACK);
         g.drawString("S8", 400, 262);
+        g.drawString("$" + TipoProducto.SUPER8.getPrecio(), 435, 262);
 
         g.setColor(new Color(139, 69, 19));
         g.fillRect(390, 280, 40, 25);
-
         g.setColor(Color.WHITE);
         g.drawString("SNK", 395, 297);
-
+        g.setColor(Color.BLACK);
+        g.drawString("$" + TipoProducto.SNICKERS.getPrecio(), 435, 297);
         g.setColor(Color.BLACK);
         g.fillRect(120, 480, 360, 80);
 
