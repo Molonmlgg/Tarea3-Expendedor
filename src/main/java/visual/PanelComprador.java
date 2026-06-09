@@ -79,6 +79,12 @@ public class PanelComprador extends JPanel {
                     425 + (i*20)
             );
         }
+
+        g.setColor(Color.ORANGE);
+        g.fillRect(160, 330, 120, 35);
+        g.setColor(Color.BLACK);
+        g.drawRect(160, 330, 120, 35);
+        g.drawString("COMBINAR", 185, 352);
     }
 
     /**
@@ -109,6 +115,14 @@ public class PanelComprador extends JPanel {
                 y <= 365) {
 
             comprarPresionado = true;
+        }
+        if (x >= 160 &&
+                x <= 280 &&
+                y >= 330 &&
+                y <= 365) {
+
+            comprador.agruparMonedas();
+            repaint();
         }
     }
 

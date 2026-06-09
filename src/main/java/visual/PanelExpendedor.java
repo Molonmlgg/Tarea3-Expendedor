@@ -13,9 +13,9 @@ import java.awt.Graphics;
  */
 public class PanelExpendedor extends JPanel {
 
-    // Referencia al modelo
+    
     private Expendedora expendedora;
-    // Mensaje que se muestra en la pantalla
+
     private String mensajePantalla;
 
     private TipoProducto productoSeleccionado;

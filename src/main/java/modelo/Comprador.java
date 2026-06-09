@@ -73,4 +73,38 @@ public class Comprador {
     public ArrayList<Producto> getProductosComprados() {
         return productosComprados;
     }
+
+    public void agruparMonedas() {
+        int contador100 = 0;
+        int contador500 = 0;
+
+        for (Moneda m : monedero) {
+            if (m.getValor() == 100) contador100++;
+            else if (m.getValor() == 500) contador500++;
+        }
+
+        while (contador100 >= 5) {
+            eliminarMonedasPorValor(100, 5);
+            monedero.add(new Moneda500());
+            contador100 -= 5;
+            contador500++;
+        }
+
+        while (contador500 >= 2) {
+            eliminarMonedasPorValor(500, 2);
+            monedero.add(new Moneda1000());
+            contador500 -= 2;
+        }
+    }
+
+    private void eliminarMonedasPorValor(int valor, int cantidad) {
+        int eliminadas = 0;
+        for (int i = monedero.size() - 1; i >= 0; i--) {
+            if (monedero.get(i).getValor() == valor) {
+                monedero.remove(i);
+                eliminadas++;
+                if (eliminadas == cantidad) break;
+            }
+        }
+    }
 }
