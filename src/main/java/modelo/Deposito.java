@@ -39,4 +39,15 @@ public class Deposito<T> {
     public int size(){
         return depo.size();
     }
+
+    /**
+     * Retorna un elemento en una posición específica sin removerlo.
+     */
+    public T getElemento(int index) {
+        if (index >= 0 && index < depo.size()) {
+            return depo.get(index);
+        }
+        return null;
+    }
+
 }
