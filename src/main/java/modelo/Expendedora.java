@@ -1,5 +1,5 @@
 package modelo;
-
+import java.util.ArrayList;
 /**
  * Simula una máquina expendedora que almacena productos en depósitos y procesa las ventas.
  */
@@ -11,7 +11,7 @@ public class Expendedora {
     private Deposito<Producto> snickers;
     private Deposito<Producto> super8;
     private Deposito<Moneda> monVu;
-    private Producto productoComprado;
+    private ArrayList<Producto> productosComprados;
     private Deposito<Moneda> depositoPago;
 
     /**
@@ -27,6 +27,7 @@ public class Expendedora {
         this.super8 = new Deposito<>();
         this.monVu = new Deposito<>();
         this.depositoPago = new Deposito<>();
+        this.productosComprados = new ArrayList<>();
 
         for (int i = 0; i < cantidad; i++) {
             coca.addItem(new CocaCola());
@@ -87,7 +88,7 @@ public class Expendedora {
                 monVu.addItem(new Moneda100());
                 vuelto -= 100;
             }
-            this.productoComprado = p;
+            this.productosComprados.add(p);
 
         } else {
             monVu.addItem(m);
@@ -110,9 +111,10 @@ public class Expendedora {
      * @return El Producto comprado, o null si está vacío.
      */
     public Producto getProducto() {
-        Producto aux = this.productoComprado;
-        this.productoComprado = null;
-        return aux;
+        if (!this.productosComprados.isEmpty()) {
+            return this.productosComprados.remove(0);
+        }
+        return null;
     }
 
     //estos bloques los añadi para poder hacer que baje el stock de la maquina y dejemos de usar fijos.

@@ -19,7 +19,7 @@ public class PanelExpendedor extends JPanel {
     private String mensajePantalla;
 
     private TipoProducto productoSeleccionado;
-    private Producto productoEnRanura;
+    private java.util.ArrayList<Producto> productosEnRanura;;
 
     // Instancias de los paneles visuales que dibujarán cada fila
     private PanelDeposito panelDepoCoca;
@@ -37,7 +37,7 @@ public class PanelExpendedor extends JPanel {
 
         this.mensajePantalla = "BIENVENIDO";
         this.productoSeleccionado = null;
-        this.productoEnRanura = null;
+        this.productosEnRanura = new java.util.ArrayList<>();
 
         this.setBackground(new Color(255, 200, 200));
 
@@ -105,38 +105,30 @@ public class PanelExpendedor extends JPanel {
         g.drawString("SNK", 395, 297);
 
         // Ranura de retiro
-        g.setColor(Color.BLACK);
-        g.fillRect(120, 480, 360, 80);
-        if (productoEnRanura != null){
-            Color color = Color.GRAY;
-            switch (productoEnRanura.getTipo()){
+        for (int i = 0; i < productosEnRanura.size(); i++) {
+            Producto p = productosEnRanura.get(i);
+            Color color = Color.BLACK;
+
+            switch (p.getTipo()){
                 case COCACOLA:
                     color = Color.RED;
                     break;
-
                 case SPRITE:
                     color = Color.GREEN;
                     break;
-
                 case FANTA:
                     color = Color.ORANGE;
                     break;
-
                 case SUPER8:
                     color = Color.YELLOW;
                     break;
-
                 case SNICKERS:
                     color = new Color(139, 69, 19);
                     break;
             }
 
-            productoEnRanura.paintComponent(
-                    g,
-                    200,
-                    490,
-                    color
-            );
+            // El factor (i * 45) hace que cada nuevo producto se dibuje 45 píxeles más a la derecha
+            p.paintComponent(g, 130 + (i * 45), 490, color);
         }
 
         // Se delega correctamente el dibujo del stock a cada panel correspondiente
@@ -197,14 +189,18 @@ public class PanelExpendedor extends JPanel {
     }
 
     public void dejarProductoEnRanura(Producto producto){
-        productoEnRanura = producto;
-        repaint();
+        if (producto != null) {
+            productosEnRanura.add(producto);
+            repaint();
+        }
     }
 
-    public Producto retirarProductoRanura(){
-        Producto aux = productoEnRanura;
-        productoEnRanura = null;
-        repaint();
-        return aux;
+    public Producto retirarProductoRanura() {
+        if (!productosEnRanura.isEmpty()) {
+            Producto aux = productosEnRanura.remove(0);
+            repaint();
+            return aux;
+        }
+        return null;
     }
 }
