@@ -30,6 +30,7 @@ public class Comprador {
     public void agregarMoneda(Moneda m) {
         if (m != null) {
             monedero.add(m);
+            this.ordenarMonedero();
         }
     }
 
@@ -95,6 +96,7 @@ public class Comprador {
             monedero.add(new Moneda1000());
             contador500 -= 2;
         }
+        this.ordenarMonedero();
     }
 
     private void eliminarMonedasPorValor(int valor, int cantidad) {
@@ -105,6 +107,11 @@ public class Comprador {
                 eliminadas++;
                 if (eliminadas == cantidad) break;
             }
+        }
+    }
+    public void ordenarMonedero() {
+        if (this.monedero != null && !this.monedero.isEmpty()) {
+            this.monedero.sort((m1, m2) -> Integer.compare(m2.getValor(), m1.getValor()));
         }
     }
 }
