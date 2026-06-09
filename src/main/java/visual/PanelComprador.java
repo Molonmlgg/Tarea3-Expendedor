@@ -53,10 +53,10 @@ public class PanelComprador extends JPanel {
             }
 
             g.setColor(Color.BLACK);
-            g.drawRect(30, 60 + (i * 50), 100, 35);
+            g.drawRect(30, 60 + (i * 50), 110, 35);
             g.drawString(
-                    "$" + moneda.getValor(),
-                    60,
+                    "$" + moneda.getValor() + " (S:" + moneda.getSerie() + ")",
+                    35,
                     82 + (i * 50)
             );
         }
