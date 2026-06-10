@@ -6,7 +6,7 @@
 * Matias Santiago Palacios Urra
 
 ## Diagrama UML
-![Diagrama UML de la aplicación](Uml_tarea_3.png)
+![Diagrama UML](Uml%20tarea%203.png)
 
 ## Interfaz Gráfica
-![Captura de la aplicación funcionando](captura_nterfaz.png)
+![Captura de la aplicación](captura%20interfaz.png)
